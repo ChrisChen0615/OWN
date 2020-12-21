@@ -1,0 +1,14 @@
+﻿@model List<OWN.Repository.Tables.Address>
+
+@{
+    ViewData["Title"] = "Address";
+}
+
+<div class="text-center">
+    <ul>
+        @foreach (var address in Model)
+        {
+            <li>@address.City</li>
+        }
+    </ul>
+</div>
