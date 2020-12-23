@@ -4,9 +4,9 @@ using OWN.Repository.Tables;
 
 namespace OWN.Repository
 {
-    public class ApplicationDbContext : IdentityDbContext<OWNUser, OWNRole, int>
+    public class OWNDbContext : IdentityDbContext<OWNUser, OWNRole, int>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public OWNDbContext(DbContextOptions<OWNDbContext> options)
             : base(options)
         {
         }

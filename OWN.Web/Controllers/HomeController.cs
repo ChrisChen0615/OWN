@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using OWN.Service;
@@ -28,31 +29,18 @@ namespace OWN.Web.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [Authorize]
         public async Task<IActionResult> Address()
         {
             var data = await _address.GetAll();
             return View("TestAddress", data);
         }
-
-        ///// <summary>
-        ///// 登入頁
-        ///// </summary>
-        ///// <returns></returns>
-        //public IActionResult Login()
-        //{
-        //    return View();
-        //}
 
         ///// <summary>
         ///// 表單post提交，準備登入
@@ -96,23 +84,6 @@ namespace OWN.Web.Controllers
         //        return RedirectToAction("ListData", "AfterLogin");//到登入後的第一頁，自行決定
         //    }
 
-        //}
-
-        ///// <summary>
-        ///// 登出
-        ///// </summary>
-        ///// <returns></returns>
-        ////登出 Action 記得別加上[Authorize]，不管用戶是否登入，都可以執行Logout
-        //public async Task<IActionResult> Logout()
-        //{
-        //    await HttpContext.SignOutAsync();
-
-        //    return RedirectToAction("Login", "Home");//導至登入頁
-        //}
-
-        //public IActionResult AjaxTest()
-        //{
-        //    return View();
         //}
     }
 }

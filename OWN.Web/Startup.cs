@@ -20,17 +20,17 @@ namespace OWN.Web
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration _Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<OWNDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    _Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<OWNUser, OWNRole>(options =>
             {
@@ -43,26 +43,41 @@ namespace OWN.Web
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 1;
             })
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<OWNDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddControllersWithViews();
 
+            //DI
             services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
             services.RegisterAssemblyPublicNonGenericClasses(Assembly.GetAssembly(typeof(IBaseService)))
                 .Where(x => x.Name.EndsWith("Service"))  //optional
                 .AsPublicImplementedInterfaces(ServiceLifetime.Scoped);
 
-            //從組態讀取登入逾時設定
-            double LoginExpireMinute = this.Configuration.GetValue<double>("LoginExpireMinute");
             //註冊 CookieAuthentication，Scheme必填
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //    .AddCookie(options =>
+            //    {
+            //        //從組態讀取設定
+            //        options.Cookie.Name = _Configuration.GetValue<string>("WebSite:Cookie:Name") + "Auth";
+            //        options.LoginPath = _Configuration.GetValue<string>("WebSite:Cookie:LoginPath");
+            //        //用戶頁面停留太久，登入逾期，或Controller中用戶登入時機點也可以設定↓,//沒給預設14天
+            //        options.ExpireTimeSpan = TimeSpan.FromMinutes(_Configuration.GetValue<double>("WebSite:Cookie:ExpireTimeMinute"));
+            //        options.SlidingExpiration = true;
+            //        //options.Cookie.Expiration = TimeSpan.FromMinutes(_Configuration.GetValue("WebSite:Cookie:ExpireTimeMinute", 180));
+            //    });
+
+            services.ConfigureApplicationCookie(options =>
             {
-                //或許要從組態檔讀取，自己斟酌決定
-                option.LoginPath = new PathString("/Home/Login");//登入頁
-                option.LogoutPath = new PathString("/Home/Logout");//登出Action
-                //用戶頁面停留太久，登入逾期，或Controller中用戶登入時機點也可以設定↓
-                option.ExpireTimeSpan = TimeSpan.FromMinutes(LoginExpireMinute);//沒給預設14天
+                // Cookie settings
+                options.Cookie.Name = _Configuration.GetValue<string>("WebSite:Cookie:Name");
+                // Setting the HttpOnly value to true, makes
+                // this cookie accessible only to ASP.NET.
+                options.Cookie.HttpOnly = true;
+
+                options.LoginPath = _Configuration.GetValue<string>("WebSite:Cookie:LoginPath");
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(_Configuration.GetValue<double>("WebSite:Cookie:ExpireTimeMinute"));
+                options.SlidingExpiration = _Configuration.GetValue<bool>("WebSite:Cookie:SlidingExpiration");
             });
         }
 
