@@ -8,9 +8,9 @@ namespace OWN.Repository
 {
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
-        private readonly ApplicationDbContext _context;
+        private readonly OWNDbContext _context;
         private readonly DbSet<T> entities;
-        public RepositoryBase(ApplicationDbContext context)
+        public RepositoryBase(OWNDbContext context)
         {
             _context = context;
             entities = context.Set<T>();

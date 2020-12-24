@@ -9,7 +9,7 @@ using OWN.Repository;
 
 namespace OWN.Repository.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(OWNDbContext))]
     [Migration("20201221032958_AddIdentity")]
     partial class AddIdentity
     {
