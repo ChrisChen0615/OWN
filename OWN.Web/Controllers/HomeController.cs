@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace OWN.Web.Controllers
 {
     [AutoValidateAntiforgeryToken]//此項跟資安有關，只要是http method post，都要驗證token
+    //[Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -35,7 +36,6 @@ namespace OWN.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [Authorize]
         public async Task<IActionResult> Address()
         {
             var data = await _address.GetAll();

@@ -5,46 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OWN.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/coreui/dist/css/coreui.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+<body class="c-app">
+    <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-show" id="sidebar">
+        <ul class="c-sidebar-nav">
+            <li class="c-sidebar-nav-title">Nav Title</li>
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="#">
+                    <i class="c-sidebar-nav-icon cil-speedometer"></i> Nav item
+                </a>
+            </li>
+            <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+                <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="c-sidebar-nav-icon cil-puzzle"></i> Nav dropdown
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    <li class="c-sidebar-nav-item">
+                        <a class="c-sidebar-nav-link" href="#">
+                            <i class="c-sidebar-nav-icon cil-puzzle"></i> Nav dropdown item 1
+                        </a>
+                    </li>
+                    <li class="c-sidebar-nav-item">
+                        <a class="c-sidebar-nav-link" href="#">
+                            <i class="c-sidebar-nav-icon cil-puzzle"></i> Nav dropdown item 2
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
+    </div>
+    <div class="c-wrapper">
+        <header class="c-header c-header-light  px-3">
+            <a class="c-header-brand" href="#">
+                OWN Project
+            </a>
+            @*原本
+                <button class="c-header-toggler c-class-toggler" type="button" data-target="#sidebar" data-class="c-sidebar-show">
+            <span class="c-header-toggler-icon"></span>
+        </button>*@
+            <button class="c-header-toggler" type="button">
+                <span class="c-header-toggler-icon"></span>
+            </button>
+            <ul class="c-header-nav mr-auto">
+                @*<li class="c-header-nav-item active">
+            <a class="c-header-nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>*@
+                <li class="c-header-nav-item">
+                    <a class="c-header-nav-link" href="#">Home</a>
+                </li>
+                <li class="c-header-nav-item">
+                    <a class="c-header-nav-link" asp-area="" asp-controller="Home" asp-action="Address">Address List</a>
+                </li>
+            </ul>
+            @await Html.PartialAsync("_LoginPartial")
+        </header>
+        <div class="c-body">
+            <main class="c-main">
+                <!-- Main content here -->
+                @RenderBody()
+            </main>
+        </div>
+        <footer class="c-footer">
+            <!-- Footer content here -->
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OWN.Web</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Address">Address</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="navbar-collapse collapse d-sm-inline-flex">
-                    @await Html.PartialAsync("_LoginPartial")
-                </div>
+                &copy; 2020 - OWN.Web
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </footer>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - OWN.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/popper.js/umd/popper.min.js"></script>
+    <script src="~/lib/jquery.perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="~/lib/coreui/dist/js/coreui.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

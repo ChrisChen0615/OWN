@@ -17,6 +17,23 @@
     {
       "library": "twitter-bootstrap@4.5.3",
       "destination": "wwwroot/lib/bootstrap"
+    },
+    {
+      "library": "popper.js@2.6.0",
+      "destination": "wwwroot/lib/popper.js"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "@coreui/coreui@3.4.0",
+      "destination": "wwwroot/lib/coreui"
+    },
+    {
+      "library": "jquery.perfect-scrollbar@1.5.0",
+      "destination": "wwwroot/lib/jquery.perfect-scrollbar"
+    },
+    {
+      "library": "font-awesome@5.15.1",
+      "destination": "wwwroot/lib/fontawesome"
     }
   ]
 }
