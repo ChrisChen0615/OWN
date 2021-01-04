@@ -1,0 +1,31 @@
+﻿@model List<OWN.Web.Views.Shared.Components.SideBarNav.SideBarNavVM>
+
+@{
+    var getUrl = new Func<string, string>(url =>
+    {
+        if (string.IsNullOrWhiteSpace(url))
+        {
+            return "#";
+        }
+
+        return url;
+    });
+}
+
+<ul class="c-sidebar-nav">
+    @foreach (var item in Model)
+    {
+        if (item.IsFolder)
+        {
+            <partial name="_Dropdown.cshtml" model="item" />
+        }
+        else
+        {
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="@getUrl(item.Url)">
+                    @item.DisplayName
+                </a>
+            </li>
+        }
+    }
+</ul>

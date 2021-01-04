@@ -1,0 +1,25 @@
+﻿@* Dropdown *@
+@model OWN.Web.Views.Shared.Components.SideBarNav.SideBarNavVM
+@{
+    var getUrl = new Func<string, string>(url =>
+    {
+        if (string.IsNullOrWhiteSpace(url))
+        {
+            return "#";
+        }
+
+        return url;
+    });
+}
+
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="@getUrl(Model.Url)">
+        @Model.DisplayName
+    </a>
+    <ul class="c-sidebar-nav-dropdown-items">
+        @if (Model.SubItems.Any())
+        {
+            <partial name="_DropdownItem.cshtml" model="Model.SubItems" />
+        }
+    </ul>
+</li>
