@@ -6,6 +6,6 @@ namespace OWN.Service
 {
     public interface IAddressService : IBaseService
     {
-        Task<IList<Address>> GetAll();
+        Task<IList<Address>> GetAll(int? pageNumber);
     }
 }

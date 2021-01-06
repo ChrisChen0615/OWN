@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using OWN.Service;
 using OWN.Web.Models;
 using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace OWN.Web.Controllers
 {
@@ -16,13 +13,11 @@ namespace OWN.Web.Controllers
         private readonly ILogger<HomeController> _logger;
         //讀取組態用
         private readonly IConfiguration _config;
-        private readonly IAddressService _address;
 
-        public HomeController(ILogger<HomeController> logger, IConfiguration config, IAddressService address)
+        public HomeController(ILogger<HomeController> logger, IConfiguration config)
         {
             _logger = logger;
             _config = config;
-            _address = address;
         }
 
         public IActionResult Index()
@@ -34,12 +29,6 @@ namespace OWN.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public async Task<IActionResult> Address()
-        {
-            var data = await _address.GetAll();
-            return View("TestAddress", data);
         }
 
         ///// <summary>

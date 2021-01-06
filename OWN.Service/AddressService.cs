@@ -2,28 +2,14 @@
 using OWN.Repository.Tables;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using System.Linq;
+using OWN.Repository.Paging;
+using Microsoft.EntityFrameworkCore;
 
 namespace OWN.Service
 {
     public class AddressService : IAddressService
     {
-        //private readonly ApplicationDbContext _context;
-        ////private readonly DbSet<Address> tAddress;
-
-        //public AddressService(ApplicationDbContext context)
-        //{
-        //    _context = context;
-        //    //tAddress = _context.Set<Address>();
-        //}
-
-        //public async Task<IList<Address>> GetAll()
-        //{
-        //    var addresses = await _context.Address.ToListAsync();
-        //    return addresses;
-        //    //var addresses = tAddress.GetAll();
-        //}
-
         private readonly IRepositoryBase<Address> _addressRepo;
 
         public AddressService(IRepositoryBase<Address> addressRepo)
@@ -31,9 +17,12 @@ namespace OWN.Service
             _addressRepo = addressRepo;
         }
 
-        public async Task<IList<Address>> GetAll()
+        public async Task<IList<Address>> GetAll(int? pageNumber)
         {
-            return await _addressRepo.GetAll();
+            var data = _addressRepo.GetAll().OrderBy(d => d.CountryRegion);
+            int pageSize = 10;
+            var result = await PaginatedList<Address>.CreateAsync(data.AsNoTracking(), pageNumber ?? 1, pageSize);
+            return result;
         }
     }
 }

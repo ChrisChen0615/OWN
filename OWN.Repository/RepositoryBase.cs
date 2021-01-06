@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,9 +16,14 @@ namespace OWN.Repository
             _context = context;
             entities = context.Set<T>();
         }
-        public async Task<IList<T>> GetAll()
+        public IQueryable<T> GetAll()
         {
-            return await entities.ToListAsync();
+            var data = entities.AsQueryable();
+            return data;
         }
+        //public async Task<List<T>> GetAll()
+        //{
+        //    return await entities.ToListAsync();
+        //}
     }
 }

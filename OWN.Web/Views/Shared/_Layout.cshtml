@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - OWN.Web</title>
+    <title>OWN.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/coreui/dist/css/coreui.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
@@ -27,21 +27,23 @@
             </button>
             <ul class="c-header-nav d-md-down-none">
                 <li class="c-header-nav-item">
-                    <a class="c-header-nav-link" asp-area="" asp-controller="Home" asp-action="Address">Address List</a>
+                    <a class="c-header-nav-link" asp-area="" asp-controller="Paging" asp-action="Address">Address List</a>
                 </li>
             </ul>
             @await Html.PartialAsync("_LoginPartial")
         </header>
         <div class="c-body">
             <main class="c-main">
-                <!-- Main content here -->
-                @RenderBody()
+                <div class="container-fluid">
+                    <!-- Main content here -->
+                    @RenderBody()
+                </div>                
             </main>
         </div>
         <footer class="c-footer">
             <!-- Footer content here -->
             <div class="container">
-                &copy; 2020 - OWN.Web
+                2020 - OWN.Web
             </div>
         </footer>
     </div>

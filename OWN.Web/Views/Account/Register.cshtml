@@ -56,8 +56,10 @@
                                     <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="確認密碼" />
                                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group d-flex">
                                     <button type="submit" class="btn btn-primary px-4">註冊</button>
+
+                                    <a class="btn btn-warning offset-md-1" asp-action="Login">返回登入</a>
                                 </div>
                             </div>
                         </form>
