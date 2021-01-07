@@ -37,7 +37,7 @@
                 <div class="container-fluid">
                     <!-- Main content here -->
                     @RenderBody()
-                </div>                
+                </div>
             </main>
         </div>
         <footer class="c-footer">
@@ -49,10 +49,11 @@
     </div>
 
     <script src="~/lib/jquery/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/popper.js/umd/popper.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/jquery.perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="~/lib/coreui/dist/js/coreui.js"></script>
+    @*<script src="~/lib/coreui/dist/js/coreui.js"></script>*@
+    <script src="~/lib/coreui/dist/js/coreui.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

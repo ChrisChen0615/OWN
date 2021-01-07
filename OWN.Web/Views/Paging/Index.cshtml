@@ -1,5 +1,5 @@
 ﻿@section Scripts
-{ 
+{
     <script src="~/views/Pagging/Index.js" asp-append-version="true"></script>
 }
 <div class="card">
@@ -7,11 +7,19 @@
         Demo 分頁
     </div>
     <div class="card-body">
-        <form class="form-inline" id="formQuery">            
+        <form class="form-inline" id="formQuery">
+            <select name="demo" class="form-control col-4">
+                <option value=""></option>
+                <option value="a">法官1</option>
+                <option value="b">家暴</option>
+                <option value="c">法官2</option>
+                <option value="d">家暴喔</option>
+                <option value="e">法官啦</option>
+            </select>
             <button type="button" class="btn btn-primary mb-2" id="btnQuery">Query</button>
         </form>
     </div>
 
     <div id="resultQuery" class="table-responsive">
-    </div>    
+    </div>
 </div>
