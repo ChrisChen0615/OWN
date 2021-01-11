@@ -17,12 +17,18 @@ namespace OWN.Service
             _addressRepo = addressRepo;
         }
 
+        //public async Task<IList<Address>> GetAll(int? pageNumber)
+        //{
+        //    var data = _addressRepo.GetAll().OrderBy(d => d.CountryRegion);
+        //    int pageSize = 10;
+        //    var result = await PaginatedList<Address>.CreateAsync(data.AsNoTracking(), pageNumber ?? 1, pageSize);
+        //    return result;
+        //}
+
         public async Task<IList<Address>> GetAll(int? pageNumber)
         {
             var data = _addressRepo.GetAll().OrderBy(d => d.CountryRegion);
-            int pageSize = 10;
-            var result = await PaginatedList<Address>.CreateAsync(data.AsNoTracking(), pageNumber ?? 1, pageSize);
-            return result;
+            return data.ToList();
         }
     }
 }

@@ -1,7 +1,16 @@
-﻿@section Scripts
+﻿@section Styles
+{
+    <link rel="stylesheet" href="~/lib/datatables-bs4/dataTables.bootstrap4.min.css" />
+
+}
+
+@section Scripts
 {
     <script src="~/views/Pagging/Index.js" asp-append-version="true"></script>
+    <script src="~/lib/datatables/jquery.dataTables.min.js" asp-append-version="true"></script>
+    <script src="~/lib/datatables-bs4/dataTables.bootstrap4.min.js" asp-append-version="true"></script>
 }
+
 <div class="card">
     <div class="card-header">
         Demo 分頁
@@ -20,6 +29,8 @@
         </form>
     </div>
 
-    <div id="resultQuery" class="table-responsive">
+    <div id="resultQuery" class="">
+        <table id="example" class="table table-striped table-bordered" style="width:100%">                       
+        </table>
     </div>
 </div>

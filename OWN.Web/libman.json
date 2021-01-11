@@ -34,6 +34,14 @@
     {
       "library": "font-awesome@5.15.1",
       "destination": "wwwroot/lib/fontawesome"
+    },
+    {
+      "library": "datatables.net@1.10.23",
+      "destination": "wwwroot/lib/datatables"
+    },
+    {
+      "library": "datatables.net-bs4@1.10.23",
+      "destination": "wwwroot/lib/datatables-bs4"
     }
   ]
 }
