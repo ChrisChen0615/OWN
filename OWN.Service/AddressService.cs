@@ -1,10 +1,10 @@
 ﻿using OWN.Repository;
-using OWN.Repository.Tables;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
 using OWN.Repository.Paging;
-using Microsoft.EntityFrameworkCore;
+using OWN.Repository.Tables;
+using OWN.Service.Paging.Dto;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OWN.Service
 {
@@ -17,18 +17,28 @@ namespace OWN.Service
             _addressRepo = addressRepo;
         }
 
-        //public async Task<IList<Address>> GetAll(int? pageNumber)
-        //{
-        //    var data = _addressRepo.GetAll().OrderBy(d => d.CountryRegion);
-        //    int pageSize = 10;
-        //    var result = await PaginatedList<Address>.CreateAsync(data.AsNoTracking(), pageNumber ?? 1, pageSize);
-        //    return result;
-        //}
-
-        public async Task<IList<Address>> GetAll(int? pageNumber)
+        public DtResult<Address> GetAll(PagingQueryDto input)
         {
-            var data = _addressRepo.GetAll().OrderBy(d => d.CountryRegion);
-            return data.ToList();
+            var query = _addressRepo.GetAll();
+            if (!string.IsNullOrWhiteSpace(input.City))
+            {
+                query = query.Where(q => q.City == input.City);
+            }
+
+            var filteredResultsCount = query.Count();
+            var totalResultsCount = query.Count();
+
+            var result = new DtResult<Address>
+            {
+                Draw = input.Draw,
+                RecordsTotal = totalResultsCount,
+                RecordsFiltered = filteredResultsCount,
+                Data = query
+                    .Skip(input.Start)
+                    .Take(input.Length)
+                    .ToList()
+            };
+            return result;
         }
     }
 }
