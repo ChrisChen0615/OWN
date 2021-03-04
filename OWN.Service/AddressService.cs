@@ -40,5 +40,30 @@ namespace OWN.Service
             };
             return result;
         }
+
+        public List<Address> GetAllList(PagingQueryDto input)
+        {
+            var query = _addressRepo.GetAll();
+            if (!string.IsNullOrWhiteSpace(input.City))
+            {
+                query = query.Where(q => q.City == input.City);
+            }
+
+            //var filteredResultsCount = query.Count();
+            //var totalResultsCount = query.Count();
+
+            //var result = new DtResult<Address>
+            //{
+            //    Draw = input.Draw,
+            //    RecordsTotal = totalResultsCount,
+            //    RecordsFiltered = filteredResultsCount,
+            //    Data = query
+            //        .Skip(input.Start)
+            //        .Take(input.Length)
+            //        .ToList()
+            //};
+            var result = query.ToList();
+            return result;
+        }
     }
 }

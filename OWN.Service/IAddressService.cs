@@ -9,5 +9,7 @@ namespace OWN.Service
     public interface IAddressService : IBaseService
     {
         DtResult<Address> GetAll(PagingQueryDto input);
+
+        List<Address> GetAllList(PagingQueryDto input);
     }
 }

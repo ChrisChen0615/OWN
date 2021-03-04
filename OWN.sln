@@ -9,6 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OWN.Repository", "OWN.Repos
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OWN.Service", "OWN.Service\OWN.Service.csproj", "{E590975E-3839-4B00-996C-DA4871B6594C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OWN.NUnitTest", "OWN.NUnitTest\OWN.NUnitTest.csproj", "{8EA01845-B1D7-469A-A4BA-E56F2ED63EB3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D042643C-188B-4006-9C54-7C037EFA3853} = {D042643C-188B-4006-9C54-7C037EFA3853}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +32,10 @@ Global
 		{E590975E-3839-4B00-996C-DA4871B6594C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E590975E-3839-4B00-996C-DA4871B6594C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E590975E-3839-4B00-996C-DA4871B6594C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EA01845-B1D7-469A-A4BA-E56F2ED63EB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EA01845-B1D7-469A-A4BA-E56F2ED63EB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA01845-B1D7-469A-A4BA-E56F2ED63EB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EA01845-B1D7-469A-A4BA-E56F2ED63EB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
